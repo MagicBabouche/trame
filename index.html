@@ -339,6 +339,103 @@ body.dragging-stack,body.dragging-stack *{cursor:grabbing!important;user-select:
 .maskp .hint{margin:0 0 6px}
 .chead .title .mb{font-size:11px;font-weight:400;opacity:.8;margin-left:8px;border:1px solid var(--line);border-radius:999px;padding:0 7px;letter-spacing:0;text-transform:none}
 .viewport.maskedit canvas{cursor:crosshair;touch-action:none}
+
+/* ===== Responsive : téléphone, tablette, grand écran ===== */
+#btnSavePhoto,.cmp2,.pvbar{display:none}
+.pvbar[hidden]{display:none!important}
+.pvbar span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sheet{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;gap:10px;padding:calc(14px + env(safe-area-inset-top,0px)) 14px calc(14px + env(safe-area-inset-bottom,0px));background:rgba(10,20,22,.88);color:#fff;overflow:auto}
+.sheet img{max-width:100%;max-height:58dvh;object-fit:contain;border-radius:10px;-webkit-touch-callout:default;user-select:auto}
+.sheet p{margin:0;text-align:center;max-width:46ch;font-size:13.5px}
+.sheet .sb{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.sheet button,.sheet a.btn{color:#fff;border-color:rgba(255,255,255,.5);text-decoration:none;display:inline-block;border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:9px 16px;font-size:14px;background:transparent}
+.sheet button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.ddopt.pv{background:color-mix(in srgb,var(--accent) 20%,var(--bg))}
+.fxbtn.sel{outline:2px solid var(--accent);outline-offset:-2px}
+
+@media (min-width:1024px){
+  main{grid-template-columns:clamp(300px,26vw,400px) minmax(0,1fr) clamp(290px,24vw,360px)}
+}
+@media (min-width:1024px) and (max-width:1279px){
+  .fxbtn .fxt{width:78px;height:78px}.fxbtn{gap:10px;padding:8px 10px}
+}
+
+/* Téléphones et tablettes : l'image reste fixe, les deux listes défilent */
+@media (max-width:1023px){
+  html{height:100%;height:100dvh;overflow:hidden}
+  body{height:100%;overflow:hidden}
+  .top{flex-wrap:nowrap;padding:8px 12px;gap:8px}
+  .brand{padding-left:28px}.brand strong{font-size:19px}.brand span{display:none}
+  .actions{flex-wrap:nowrap;gap:6px}
+  .actions button{padding:7px 12px;white-space:nowrap}
+  #btnCompare,#btnActual,#btnExport{display:none}
+  #btnSavePhoto{display:inline-block}
+  main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) minmax(0,1.15fr);gap:8px;padding:0 8px calc(8px + env(safe-area-inset-bottom,0px))}
+  .stage{grid-row:1;order:0;height:clamp(190px,34dvh,560px);flex:none}
+  .lib{grid-row:2;overflow-y:auto;padding:8px 10px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  .stack{grid-row:3;overflow-y:auto;padding:8px 10px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  .lib,.stack,.stage{border-radius:16px}
+  .viewport canvas{inset:8px;width:calc(100% - 16px);height:calc(100% - 16px)}
+  .viewport.actual{padding:8px}
+  .drop{inset:8px;padding:10px;overflow:auto}
+  .drop h1{font-size:20px;margin-bottom:10px}.drop h1::after{display:none}.drop p{display:none}
+  .bar{padding:5px 10px;gap:6px;flex-wrap:nowrap}
+  .bar .dim{font-size:12px;white-space:nowrap}
+  .bar label.dim{display:none}
+  .bar button,.bar select{padding:4px 10px;font-size:12.5px}
+  .strip{padding:5px 10px}.th{width:48px;height:48px}
+  .cmp2{position:absolute;top:10px;right:10px;z-index:5;padding:6px 12px;background:var(--bg);touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+  .viewport.has .cmp2{display:block}
+  .pvbar{position:absolute;left:10px;right:10px;bottom:10px;z-index:6;display:flex;align-items:center;gap:6px;padding:6px 8px 6px 14px;border-radius:999px;background:var(--bg);border:1px solid var(--accent);box-shadow:0 8px 24px -8px rgba(0,0,0,.45)}
+  .pvbar button{padding:6px 12px}
+  /* Bibliothèque : défilement horizontal des effets */
+  .lib .tabs{margin:0 0 8px}.lib .tabs button{padding:5px 8px}
+  #tabFx{display:flex;flex-direction:column}
+  #tabFx>h2,#tabFx>.listtools{display:none}
+  #tabFx>h3{font-size:11px;margin:8px 0 4px;order:5}
+  #tabFx>h3:nth-of-type(2){display:none}
+  #tabFx>h3:has(+ #mylists:empty),#mylists:empty{display:none}
+  #search{order:0;margin-bottom:8px}
+  #library{order:1;display:flex;flex-direction:row;align-items:stretch;gap:8px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+  #presets,#mylists{order:4;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
+  #presets button,#mylists>*{flex:none;white-space:nowrap}
+  #mylists{order:6!important}
+  #library>h3{flex:none;writing-mode:vertical-rl;transform:rotate(180deg);margin:0;padding:0 2px;font-size:11px;letter-spacing:.12em;white-space:nowrap;align-self:stretch;text-align:center}
+  details.sub,details.sub>.subc{display:contents;margin:0;padding:0;border:0}
+  details.sub>summary{display:none}
+  #library .fxbtn{flex:none;width:92px;flex-direction:column;align-items:stretch;gap:4px;padding:5px;margin:0;scroll-snap-align:start;border:1px solid var(--line);border-radius:12px;text-align:center}
+  #library .fxbtn .fxt{width:100%;height:auto;aspect-ratio:1/1}
+  #library .fxbtn b{font-size:12px;line-height:1.2}
+  #library .fxbtn small{display:none}
+  /* Pile / réglages */
+  .stackhead{position:sticky;top:-8px;z-index:4;margin:-8px -10px 4px;padding:8px 10px 4px;background:var(--bg)}
+  .stack>.hint{display:none}
+  .stackbar{flex-wrap:nowrap;overflow-x:auto;margin-bottom:8px}.stackbar button{flex:none;white-space:nowrap}
+  .ib{min-width:34px;min-height:34px}
+  .grip{width:22px;height:30px;margin:0 2px 0 0}
+  .card{margin-bottom:8px}
+  input[type=range]{height:30px}
+  .fxbtn{touch-action:manipulation}
+}
+@media (max-width:1023px) and (max-height:700px) and (orientation:portrait){
+  .stage{height:30dvh}
+  #library .fxbtn{width:78px}
+}
+/* Tablette en portrait : listes côte à côte sous l'image */
+@media (min-width:700px) and (max-width:1023px) and (orientation:portrait){
+  main{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
+  .stage{grid-column:1/-1;height:clamp(260px,44dvh,680px)}
+  .lib{grid-row:2;grid-column:1}.stack{grid-row:2;grid-column:2}
+  #library .fxbtn{width:104px}
+}
+/* Téléphone en paysage : image à gauche, listes à droite */
+@media (max-width:1023px) and (orientation:landscape) and (max-height:600px){
+  .top{padding:4px 10px}.brand strong{font-size:16px}
+  main{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:6px;padding:0 6px calc(6px + env(safe-area-inset-bottom,0px))}
+  .stage{grid-column:1;grid-row:1/3;height:auto}
+  .lib{grid-column:2;grid-row:1}.stack{grid-column:2;grid-row:2}
+  #library .fxbtn{width:72px}
+}
 </style>
 </head>
 <body>
@@ -349,6 +446,7 @@ body.dragging-stack,body.dragging-stack *{cursor:grabbing!important;user-select:
     <button id="btnCompare" type="button" title="Maintenir pour voir l'original">Comparer</button>
     <button id="btnActual" type="button" aria-pressed="false">Taille réelle</button>
     <button id="btnExport" type="button" class="primary">Exporter en PNG</button>
+    <button id="btnSavePhoto" type="button" class="primary">Enregistrer dans Photos</button>
   </div>
 </header>
 
@@ -377,6 +475,8 @@ body.dragging-stack,body.dragging-stack *{cursor:grabbing!important;user-select:
   <section class="stage" aria-label="Aperçu">
     <div class="viewport" id="viewport">
       <canvas id="view" aria-label="Image avec effets"></canvas>
+      <button type="button" id="btnCompare2" class="cmp2">Original</button>
+      <div class="pvbar" id="pvbar" hidden><span>Aperçu : <b id="pvName"></b></span><button type="button" class="primary" id="pvAdd">Ajouter</button><button type="button" id="pvCancel">Annuler</button></div>
       <div class="drop">
         <div>
           <h1>Déposez une image</h1>
@@ -1182,6 +1282,8 @@ def('retrogame','Retro Game','Pixels et grilles','Pixels épais et palette de co
 /* ============ État et rendu ============ */
 const S={src:null,orig:null,result:null,stack:[],cache:[],seed:20260610,maxDim:1400,showOrig:false,uid:0,srcVer:0,query:''};
 const $=id=>document.getElementById(id);
+const MQ_LAY=matchMedia('(max-width:1023px)'),MQ_TAP=matchMedia('(max-width:1023px),(hover:none) and (pointer:coarse)');
+const tapMode=()=>MQ_TAP.matches;
 const view=$('view'),vctx=view.getContext('2d');
 
 function schedule(){histSoon();if(S._raf)return;S._raf=requestAnimationFrame(()=>{S._raf=0;render()})}
@@ -1398,7 +1500,7 @@ function mirIcon(k){
   return `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><defs><pattern id="mirh" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="3" stroke="currentColor" stroke-width="1"/></pattern></defs>${a}<rect x="3" y="3" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`;
 }
 /* ===== Menus déroulants personnalisés : l'effet s'affiche au survol des choix ===== */
-let PV=null,DDO=null;
+let PV=null,DDO=null,DDprev=null;
 function pvSet(it,key,val,blend){if(!PV)PV={it,key,blend,orig:blend?it.blend:it.params[key]};if(blend)it.blend=val;else it.params[key]=val;schedule()}
 function pvEnd(){if(!PV)return;const{it,key,blend,orig}=PV;PV=null;if(blend)it.blend=orig;else it.params[key]=orig;schedule()}
 function pvCancel(){PV=null}
@@ -1411,13 +1513,13 @@ function makeDD(opts,value,o){
   const cur=opts.find(x=>x[0]===value)||opts[0];
   const btn=h('button',{type:'button',class:'ddbtn',id:o.id,'aria-haspopup':'listbox','aria-expanded':'false'},h('span',{class:'ddtx'},cur[1]),h('span',{class:'ddch'},ico('down')));
   function open(){
-    closeDD();
+    closeDD();DDprev=null;
     const list=h('div',{class:'ddlist',role:'listbox','aria-label':o.label||''}),items=[];
     opts.forEach(([val,lab])=>{
       const el=h('div',{class:'ddopt'+(val===cur[0]?' sel':''),role:'option',tabindex:'-1','aria-selected':String(val===cur[0])},lab);
       el.onmouseenter=()=>o.hover&&o.hover(val);
       el.onfocus=()=>o.hover&&o.hover(val);
-      el.onclick=()=>{pvCancel();o.pick(val);closeDD()};
+      el.onclick=()=>{if(tapMode()&&o.hover&&el!==DDprev){if(DDprev)DDprev.classList.remove('pv');DDprev=el;el.classList.add('pv');o.hover(val);return}pvCancel();o.pick(val);closeDD()};
       items.push(el);list.append(el);
     });
     list.onmouseleave=()=>{if(o.leave)o.leave()};
@@ -1564,7 +1666,7 @@ const SUBS={'Tramage':[{n:'Trames',ids:['d_fs','d_atk','d_jar','d_stu','d_bay']}
 var S_subOpen={};
 function fxButton(f){
   const th=h('span',{class:'fxt','aria-hidden':'true'},h('canvas',{}));
-  const b=h('button',{class:'fxbtn',type:'button',title:'Ajouter à la pile',onclick:()=>f.id==='imglayer'?$('layerFile').click():addEffect(f.id),onmouseenter:()=>f.id==='imglayer'?0:previewStart(f.id),onmouseleave:previewStop,onfocus:()=>f.id==='imglayer'?0:previewStart(f.id),onblur:previewStop},th,h('span',{class:'fxtx'},h('b',{},f.name),h('small',{},f.desc)));
+  const b=h('button',{class:'fxbtn',type:'button',title:'Ajouter à la pile',onclick:()=>f.id==='imglayer'?$('layerFile').click():(tapMode()?tapFx(f.id,b):addEffect(f.id)),onmouseenter:()=>f.id==='imglayer'||tapMode()?0:previewStart(f.id),onmouseleave:()=>tapMode()?0:previewStop(),onfocus:()=>f.id==='imglayer'||tapMode()?0:previewStart(f.id),onblur:()=>tapMode()?0:previewStop()},th,h('span',{class:'fxtx'},h('b',{},f.name),h('small',{},f.desc)));
   thumbEnqueue(f.id,th);return b;
 }
 function renderLibrary(){
@@ -1581,7 +1683,7 @@ function renderLibrary(){
     const subs=SUBS[cat]||[];
     subs.forEach(sb=>{
       const its=items.filter(f=>sb.ids.includes(f.id));if(!its.length)return;
-      const det=h('details',{class:'sub',open:!!q||!!S_subOpen[sb.n]},
+      const det=h('details',{class:'sub',open:!!q||!!S_subOpen[sb.n]||MQ_LAY.matches},
         h('summary',{},h('span',{class:'chev'},ico('chev')),h('span',{class:'subn'},sb.n),h('small',{},its.length)),
         h('div',{class:'subc'},its.map(fxButton)));
       det.addEventListener('toggle',()=>{if(!q)S_subOpen[sb.n]=det.open});
@@ -2310,6 +2412,66 @@ document.addEventListener('keydown',e=>{
   }
   requestAnimationFrame(tick);
 })();
+
+/* ===== Mobile : aperçu au toucher, défilement, enregistrement dans Photos ===== */
+const TP={id:null,btn:null};
+function tapRun(){
+  const id=TP.id;if(!id||!S.src)return;
+  const fx=FX[id],params={};fx.params.forEach(pd=>params[pd.k]=pd.def);
+  try{S.preview=fx.run(S.result||S.src,params,{seed:S.seed,i:S.stack.length})}catch(e){console.error(e);return}
+  paint();
+}
+function tapClear(repaint){
+  if(TP.btn)TP.btn.classList.remove('sel');
+  TP.id=null;TP.btn=null;$('pvbar').hidden=true;
+  if(repaint!==false&&S.preview){S.preview=null;paint()}
+}
+function tapFx(id,btn){
+  if(!S.src){toast('Ouvrez d\'abord une image.');return}
+  if(TP.id===id){addEffect(id);return}
+  tapClear(false);TP.id=id;TP.btn=btn;btn.classList.add('sel');
+  $('pvName').textContent=FX[id].name;$('pvbar').hidden=false;
+  setTimeout(()=>{if(TP.id===id)tapRun()},0);
+}
+$('pvAdd').onclick=()=>{if(TP.id)addEffect(TP.id)};
+$('pvCancel').onclick=()=>tapClear();
+{const _add=addEffect;addEffect=function(id,over){tapClear(false);_add(id,over);
+  if(MQ_LAY.matches)setTimeout(()=>{const sc=document.querySelector('aside.stack'),cs=$('stack').querySelectorAll('.card'),c=cs[cs.length-1];
+    if(sc&&c)sc.scrollTo({top:sc.scrollTop+c.getBoundingClientRect().top-sc.getBoundingClientRect().top-48,behavior:'smooth'})},80)}}
+{const _render=render;render=function(){_render();if(TP.id)tapRun()}}
+{const _so=setOrig;setOrig=function(a,w,hh){tapClear(false);S.preview=null;const first=!S.orig;_so(a,w,hh);
+  if(first&&tapMode())toast('Touchez un effet pour le prévisualiser, touchez-le encore pour l\'ajouter.')}}
+MQ_LAY.addEventListener('change',()=>renderLibrary());
+/* Bouton « Original » (maintenir) sur l'image */
+{const c2=$('btnCompare2');c2.addEventListener('pointerdown',holdOn);
+ ['pointerup','pointerleave','pointercancel','blur'].forEach(ev=>c2.addEventListener(ev,holdOff));
+ c2.addEventListener('contextmenu',e=>e.preventDefault())}
+/* Enregistrer dans la photothèque (feuille de partage, sinon appui long) */
+function closeSheet(){const sh=document.querySelector('.sheet');if(!sh)return;URL.revokeObjectURL(sh.dataset.url);sh.remove()}
+function saveSheet(blob,file){
+  closeSheet();
+  const url=URL.createObjectURL(blob),sh=document.createElement('div');sh.className='sheet';sh.dataset.url=url;
+  const img=document.createElement('img');img.src=url;img.alt='Image à enregistrer';
+  const p=document.createElement('p');p.textContent='Appuyez longuement sur l\'image, puis choisissez « Ajouter à Photos » (iPhone) ou « Télécharger l\'image » (Android).';
+  const bs=document.createElement('div');bs.className='sb';
+  const share=document.createElement('button');share.type='button';share.className='primary';share.textContent='Enregistrer dans Photos';
+  share.onclick=async()=>{try{if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file]});closeSheet()}else toast('Utilisez l\'appui long sur l\'image.')}catch(e){if(!e||e.name!=='AbortError')toast('Utilisez l\'appui long sur l\'image.')}};
+  const dl=document.createElement('a');dl.className='btn';dl.href=url;dl.download=file.name;dl.textContent='Télécharger le PNG';
+  const cl=document.createElement('button');cl.type='button';cl.textContent='Fermer';cl.onclick=closeSheet;
+  bs.append(share,dl,cl);sh.append(img,p,bs);document.body.append(sh);
+}
+async function savePhoto(){
+  const c=S.result||S.src;
+  if(!c){toast('Ouvrez d\'abord une image.');return}
+  const blob=await new Promise(r=>c.toBlob(r,'image/png'));
+  if(!blob){toast('L\'export a échoué.');return}
+  const file=new File([blob],'trame-'+Date.now()+'.png',{type:'image/png'});
+  try{
+    if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file]});return}
+  }catch(e){if(e&&e.name==='AbortError')return}
+  saveSheet(blob,file);
+}
+$('btnSavePhoto').onclick=savePhoto;
 </script>
 </body>
 </html>
