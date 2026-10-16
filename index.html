@@ -516,6 +516,14 @@ body.dragging-stack,body.dragging-stack *{cursor:grabbing!important;user-select:
   body.lib-closed .lib,body.st-closed .stack{padding-bottom:0}
   body.lib-closed #togFx,body.st-closed .stackhead{border-bottom:0;border-radius:14px}
 }
+
+/* ===== Mobile v5 : menu Effets, défilement vertical uniquement ===== */
+@media (max-width:1023px){
+  .lib{overflow-x:hidden;overflow-y:auto;touch-action:pan-y;overscroll-behavior-x:none}
+  #library,#presets,#mylists{overflow-x:hidden!important;touch-action:pan-y}
+  #presets,#mylists{flex-wrap:wrap!important}
+  #presets button,#mylists>*{white-space:normal}
+}
 </style>
 </head>
 <body>
