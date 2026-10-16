@@ -485,6 +485,37 @@ body.dragging-stack,body.dragging-stack *{cursor:grabbing!important;user-select:
   #library>h3{grid-column:1/-1;writing-mode:horizontal-tb;transform:none;text-align:left;margin:6px 0 0;padding:0;align-self:auto}
   #library .fxbtn{width:auto;min-width:0}
 }
+
+/* ===== Mobile v4 : en-têtes fixes et compacts, espaces réduits ===== */
+@media (max-width:1023px){
+  .top{padding:5px 10px;gap:6px}
+  .brand strong{font-size:17px}
+  .actions button{padding:5px 11px;font-size:12.5px}
+  main{gap:5px;padding:0 5px calc(5px + env(safe-area-inset-bottom,0px))}
+  .lib,.stack,.stage{border-radius:14px}
+  .lib,.stack{padding:0 8px 6px}
+  .viewport canvas{inset:5px;width:calc(100% - 10px);height:calc(100% - 10px)}
+  .viewport.actual{padding:5px}
+  .drop{inset:5px}
+  .mobtog{padding:3px 10px;min-height:30px;font-size:13px}
+  #togFx{position:sticky;top:0;z-index:4;width:calc(100% + 16px);margin:0 -8px 6px;padding:3px 18px;border-radius:0;border:0;border-bottom:1px solid var(--line);background:var(--bg);box-shadow:0 6px 0 var(--bg)}
+  #togFx{border-radius:14px 14px 0 0}
+  .stackhead{top:0;margin:0 -8px 4px;padding:3px 8px;border-bottom:1px solid var(--line);border-radius:14px 14px 0 0}
+  .stackhead .mobtog{border:0;background:transparent;padding:3px 8px}
+  .stackhead #btnClear{padding:2px 8px;font-size:12px}
+  .stackbar{margin-bottom:6px;gap:5px}.stackbar button{padding:3px 9px;font-size:12.5px}
+  .card{margin-bottom:6px}
+  .ib{min-width:32px;min-height:32px}
+  #library{gap:6px}
+  #library .fxbtn{padding:4px}
+  #library .fxbtn b{font-size:11.5px}
+  #library>h3{margin:4px 0 0;font-size:10.5px}
+  .row{margin-top:7px}
+  .cbody{padding:2px 10px 10px}
+  .pvbar,.cmp2{bottom:6px}.cmp2{top:7px;right:7px;bottom:auto}.pvbar{left:7px;right:7px}
+  body.lib-closed .lib,body.st-closed .stack{padding-bottom:0}
+  body.lib-closed #togFx,body.st-closed .stackhead{border-bottom:0;border-radius:14px}
+}
 </style>
 </head>
 <body>
