@@ -477,6 +477,14 @@ body.dragging-stack,body.dragging-stack *{cursor:grabbing!important;user-select:
   body.st-closed main{grid-template-rows:minmax(0,1fr) auto}
   body.lib-closed.st-closed main{grid-template-rows:auto auto}
 }
+
+/* ===== Mobile v3 : menu Effets = grille de miniatures ===== */
+@media (max-width:1023px){
+  .lib .tabs,#search{display:none!important}
+  #library{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;overflow:visible;scroll-snap-type:none;padding-bottom:8px}
+  #library>h3{grid-column:1/-1;writing-mode:horizontal-tb;transform:none;text-align:left;margin:6px 0 0;padding:0;align-self:auto}
+  #library .fxbtn{width:auto;min-width:0}
+}
 </style>
 </head>
 <body>
